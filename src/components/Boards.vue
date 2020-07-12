@@ -62,7 +62,7 @@
               :rules="[rules.required, rules.lengthDesc]"
             >
               <template v-slot:append>
-                <q-icon v-if="boards[editIndex].desc !== ''" name="close" @click="search = ''" class="cursor-pointer" />
+                <q-icon v-if="boards[editIndex].desc !== ''" name="close" @click="boards[editIndex].desc = ''" class="cursor-pointer" />
               </template>
             </q-input>
             <q-card-actions align="right" class="text-primary">

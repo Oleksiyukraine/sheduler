@@ -13,7 +13,11 @@
             lazy-rules
             :rules="[rules.required, rules.email]"
             value=""
-          />
+          >
+            <template v-slot:append>
+              <q-icon v-if="user.email !== ''" name="close" @click="user.email = ''" class="cursor-pointer" />
+            </template>
+          </q-input>
           <q-input
             ref="password"
             v-model="user.password"
