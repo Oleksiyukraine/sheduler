@@ -4,12 +4,13 @@ A Quasar Framework app
 
 ## Description
 In this project i use:
- for frontend: quasar framework
- for backand: firebaseAPI
- for localization: vue-i18n
- for http req: axios
+```bash
+ as frontend: quasar framework /n
+ as backand: firebaseAPI
+ as localization: vue-i18n
+ as http req: axios
  and vuedraggable npm
-
+```
 ## Install the dependencies
 ```bash
 npm install
