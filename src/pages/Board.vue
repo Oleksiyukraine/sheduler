@@ -23,7 +23,17 @@
           </div>
         </div>
         <div class="search-wrapper">
-          <q-input dense v-model="search" :label="$t('findTask')" class="q-pa-sm" value=""/>
+          <q-input
+            dense
+            v-model="search"
+            :label="$t('findTask')"
+            class="q-pa-sm"
+            value=""
+          >
+            <template v-slot:append>
+              <q-icon v-if="search !== ''" name="close" @click="search = ''" class="cursor-pointer" />
+            </template>
+          </q-input>
         </div>
         <div class="add-task" @click.stop="prompt = !prompt">
           <q-btn dense color="secondary" icon="exposure_plus_1" />
@@ -34,6 +44,7 @@
           <transition-group name="list" tag="div">
             <div v-for="(element, index) in filteredList" :key="element.id" class="task-list shadow-2" :class="{'complete-task': element.complete}">
               <div class="task-is-complete">
+                <q-icon name="drag_indicator" />
                 <q-checkbox v-model="element.complete" @input="setCompleteTask(index)" value=""/>
               </div>
               <div class="task-text" v-if="element.title">
@@ -69,7 +80,11 @@
             :rules="[rules.required, rules.lengthTitle]"
             type="textarea"
             value=""
-          />
+          >
+            <template v-slot:append>
+              <q-icon v-if="newTask.title !== ''" name="close" @click="newTask.title = ''" class="cursor-pointer" />
+            </template>
+          </q-input>
         </q-card-section>
         <q-card-actions align="right" class="text-primary">
           <q-btn flat :label="$t('cancel')" v-close-popup />
@@ -90,7 +105,11 @@
               ref="title"
               type="textarea"
               value=""
-            />
+            >
+              <template v-slot:append>
+                <q-icon v-if="tasks[editItemIndex].title !== ''" name="close" @click="tasks[editItemIndex].title = ''" class="cursor-pointer" />
+              </template>
+            </q-input>
             <q-card-actions align="right" class="text-primary">
               <q-btn flat type="reset" :label="$t('cancel')" v-close-popup />
               <q-btn flat type="submit" :label="$t('editTask')" />
@@ -242,6 +261,12 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+  .task-is-complete {
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    font-weight: bold;
+  }
   .task-filter-wrapper {
     display: flex;
     align-items: center;

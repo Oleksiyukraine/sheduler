@@ -112,7 +112,10 @@ export default {
       langList: false,
       leftDrawerOpen: false,
       url: { drawerBg: 'https://placeimg.com/500/300/nature?t=' + Math.random() },
-      startLocale: { title: 'English', code: 'en-us' },
+      lang: 'en-us',
+      startLocale: {
+        title: 'Ukraine'
+      },
       locale: [
         { title: 'English', code: 'en-us' },
         { title: 'Ukraine', code: 'uk' }
@@ -132,18 +135,11 @@ export default {
       this.$store.dispatch('account/setRouteData', { from, to })
     }
   },
-  mounted () {
-    const localeStorage = this.$q.localStorage.getItem('locale')
-    if (localeStorage) {
-      this.startLocale = this.locale.find(item => item.code === localeStorage.code)
-      this.$i18n.locale = localeStorage.code
-    }
-  },
   methods: {
     setLocate (locale) {
-      this.startLocale.title = locale.title
       this.$i18n.locale = locale.code
-      this.$q.localStorage.set('locale', locale)
+      this.lang = locale.code
+      this.$q.localStorage.set('locale', locale.code)
       this.langList = false
     },
     logout () {

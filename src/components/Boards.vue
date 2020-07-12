@@ -44,19 +44,27 @@
               value=""
               counter
               :rules="[rules.required, rules.lengthTitle]"
-            />
+            >
+              <template v-slot:append>
+                <q-icon v-if="boards[editIndex].title !== ''" name="close" @click="boards[editIndex].title = ''" class="cursor-pointer" />
+              </template>
+            </q-input>
             <q-input
               dense
               v-model="boards[editIndex].desc"
               :label="$t('enterBoardDesc')"
               ref="desc"
-              lazy-rules
               value=""
               counter
               filled
               type="textarea"
+              lazy-rules
               :rules="[rules.required, rules.lengthDesc]"
-            />
+            >
+              <template v-slot:append>
+                <q-icon v-if="boards[editIndex].desc !== ''" name="close" @click="search = ''" class="cursor-pointer" />
+              </template>
+            </q-input>
             <q-card-actions align="right" class="text-primary">
               <q-btn flat type="reset" :label="$t('cancel')" v-close-popup />
               <q-btn flat type="submit" :label="$t('editBoard')"/>
@@ -72,9 +80,9 @@
             {{ $t('confirmDel') }}
           </div>
         </q-card-section>
-        <q-card-section class="flex justify-around">
-          <q-btn :label="$t('yes')" color="red" class="q-mr-md" @click="deleteBoard"/>
-          <q-btn :label="$t('nope')" color="secondary" @click="deleteAsk = false, boardToDel = null"/>
+        <q-card-section class="flex justify-between">
+          <q-btn :label="$t('yes')" color="red" class="q-mr-md" @click="deleteBoard" style="min-width: 100px"/>
+          <q-btn :label="$t('nope')" color="secondary" @click="deleteAsk = false, boardToDel = null" style="min-width: 100px"/>
         </q-card-section>
       </q-card>
     </q-dialog>

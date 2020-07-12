@@ -28,7 +28,11 @@
               value=""
               counter
               :rules="[rules.required, rules.lengthTitle]"
-            />
+            >
+              <template v-slot:append>
+                <q-icon v-if="newBoard.title !== ''" name="close" @click="newBoard.title = ''" class="cursor-pointer" />
+              </template>
+            </q-input>
             <q-input
               dense
               v-model="newBoard.desc"
@@ -40,7 +44,11 @@
               filled
               type="textarea"
               :rules="[rules.required, rules.lengthDesc]"
-            />
+            >
+              <template v-slot:append>
+                <q-icon v-if="newBoard.desc !== ''" name="close" @click="newBoard.desc = ''" class="cursor-pointer" />
+              </template>
+            </q-input>
             <q-card-actions align="right" class="text-primary">
               <q-btn flat type="reset" :label="$t('cancel')" v-close-popup />
               <q-btn flat type="submit" :label="$t('addBoard')"/>
